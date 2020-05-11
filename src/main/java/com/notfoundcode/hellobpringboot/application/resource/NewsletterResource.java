@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class NewsletterResource {
 
-    @PostMapping(value = "/newsletter", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.TEXT_HTML_VALUE)
+    @PostMapping(value = "/newsletter",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.TEXT_HTML_VALUE)
     public String postNewsletter(NewsletterRequest newsletterRequest, Model model){
-        model.addAttribute("newsletterData",  newsletterRequest);
+        model.addAttribute(newsletterRequest);
         return "newsletterResult";
     }
 }
