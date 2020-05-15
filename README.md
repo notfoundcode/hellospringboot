@@ -9,6 +9,6 @@ This branch contains the persistence part - create and update.
 
 - Clone the project
 - checkout this branch
-- Open it in your favorite IDE - mine is IntelliJ
+- Open it in your favorite IDE - mine is IntelliJ 
 - Run
 - Go to http://localhost:8080 or http://localhost:8080/?name=NotFoundCode to see the results :)
