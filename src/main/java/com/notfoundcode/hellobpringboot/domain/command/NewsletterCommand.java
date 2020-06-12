@@ -3,6 +3,7 @@ package com.notfoundcode.hellobpringboot.domain.command;
 import com.notfoundcode.hellobpringboot.application.dto.NewsletterRequest;
 import com.notfoundcode.hellobpringboot.application.dto.NewsletterResponse;
 import com.notfoundcode.hellobpringboot.domain.model.Newsletter;
+import com.notfoundcode.hellobpringboot.infraestructure.exception.IdNotFoundException;
 import com.notfoundcode.hellobpringboot.infraestructure.repository.NewsletterRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -28,5 +29,13 @@ public class NewsletterCommand {
     private Newsletter saveNewsletter(Newsletter newsletter) {
         log.warn("Newsletter: {}", newsletter.toString());
         return newsletterRepository.save(newsletter);
+    }
+
+    public NewsletterResponse unsubscribeNewsletter(Long id) throws IdNotFoundException {
+        return new NewsletterResponse(newsletterRepository.findById(id).map(nl -> {
+            log.warn("Found id {}", nl.toString());
+            newsletterRepository.deleteById(nl.getId());
+            return nl;
+        }).orElseThrow(() -> new IdNotFoundException("We couldn't find the id in our database")));
     }
 }
